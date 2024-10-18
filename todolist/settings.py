@@ -26,10 +26,12 @@ SECRET_KEY = "django-insecure-$d8fl4p+d3-mno76h*&pvuxe&9@w%pt@nd=@$s#b^8lvt@e%=a
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'to-do-app-django-mqo8.onrender.com',
-    'localhost',  # for local development
-    '127.0.0.1',  # for local development
+    'to-do-app-django-r6o2.onrender.com',  # Add any other previous hosts
+    'to-do-app-django-mqo8.onrender.com',  # Include this line for the current deployment
+    'localhost',
+    '127.0.0.1',
 ]
+
 
 
 
@@ -129,6 +131,8 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Ensure this path is correct
+]
+
