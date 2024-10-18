@@ -1,0 +1,101 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0a1a3a;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .signup-container {
+            background-color: #4a5a7a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .signup-container h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .signup-container label {
+            display: block;
+            color: white;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .signup-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-container button:hover {
+            background-color: #555;
+        }
+        .signup-container .login-link {
+            margin-top: 20px;
+            color: #ccc;
+        }
+        .signup-container .login-link a {
+            color: #f0e000;
+            text-decoration: none;
+        }
+        .signup-container .login-link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 400px) {
+            .signup-container {
+                padding: 15px;
+            }
+            .signup-container h1 {
+                font-size: 1.5em;
+            }
+            .signup-container input, .signup-container button {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Signup</h1>
+        <form method = "post">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email id">
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password">
+            
+            <button type="submit">Signup</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="/login">Login</a>
+        </div>
+    </div>
+</body>
+</html>

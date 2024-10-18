@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>Get Things Done</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #0a1a3a;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            filter: grayscale(100%);
+        }
+        .container {
+            text-align: center;
+            color: white;
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            background-color: #1a2330;
+        }
+        .container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .task-container {
+            background-color: #3a4a5a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .task-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .task-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: #444;
+            color: #fff;
+        }
+        .task-container input[type="text"]::placeholder {
+            color: #bbb;
+        }
+        .task-container button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .task-container button[type="submit"]:hover {
+            background-color: #777;
+        }
+        .logout-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+        .task-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .task-list div {
+            background-color: #444;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .remove-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello {{ request.user.username }}</h1>
+        <div class="task-container">
+            <h2>Get Things Done?</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="five minutes for" required>
+                <input type="submit" class="submit_button" value="Add Task">
+            </form>
+        </div>
+        <div class="task-list">
+            <h2>Your Tasks:</h2>
+            {% for task in tasks %}
+                <div>
+                    {{ task.title }}
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.srno }}">
+                        <button type="submit" class="remove-button">Remove</button>
+                    </form>
+                </div>
+            {% empty %}
+                <div>No tasks added yet.</div>
+            {% endfor %}
+        </div>
+        <a href="/login" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>
